@@ -1,4 +1,8 @@
-{% extends 'cosmos/header.html' %} {% block body %}
+{% extends 'cosmos/header.html' %}
+{% block head %}
+  <title>"{{ query }}" | cosmos-search</title>
+{% endblock %}
+{% block body %}
 <h6>Showing <span style="color: #5D337F;">{{ amount }}</span> results for: <span style="color: #5D337F;">{{ query }}</span></h6>
 <hr> {% for entry in result %}
 <div class="card">
@@ -17,6 +21,25 @@
                 <a href="https://github.com/OpenGenus/cosmos/blob/master/code/{{entry.path}}/{{file}}" target="_blank" class="dropdown-item">{{file}}</a> {% endfor %}
             </div>
         </div>
+    </div>
+</div>
+<br> {% endfor %}
+<h5>Recommended results</h5>
+<hr> {% for j in recommend %}
+<div class="card">
+    <div class="card-body">
+
+        <form method="get">
+          <div>
+            <h6 class="card-title">
+             {% for k in j.recdirs %}
+             {{ k }} /
+             {% endfor %}
+        </h6>
+              <a class="btn-link" href="/query/?q={{j.last}}">solution
+              </a>
+          </div>
+        </form>
     </div>
 </div>
 <br> {% endfor %} {% endblock %}
